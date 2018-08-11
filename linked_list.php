@@ -10,7 +10,7 @@ class Node {
 }
 
 class LinkedList {
-  public $firstNode = NULL;
+  private $firstNode = NULL;
   private $totalNodes = 0;
 
   public function insert (string $data = NULL) {
@@ -28,6 +28,20 @@ class LinkedList {
     return TRUE;
   }
 
+  public function insertAtFirst (string $data= NULL) {
+    $newNode = new Node($data);
+    if ($this->firstNode===NULL) {
+        $this->firstNode = &$newNode;
+    } else {
+      $currentNode =$this->firstNode;
+      $this->firstNode= &$newNode;
+      $this->firstNode->next= $currentNode;
+    }
+    $this->totalNodes++;
+    return true;
+  }
+
+
   public function display (){
     echo "Total: " . $this->totalNodes . " \n";
     $currentNode = $this->firstNode;
@@ -42,11 +56,12 @@ class LinkedList {
 
 
 $radioheadAlbums= new LinkedList;
-$radioheadAlbums->insert("Pablo Honey");
 $radioheadAlbums->insert("The bends");
 $radioheadAlbums->insert("OK Computer");
 $radioheadAlbums->insert("Kid A");
 $radioheadAlbums->insert("Amnesiac");
+$radioheadAlbums->insertAtFirst("Pablo Honey");
+$radioheadAlbums->insertAtFirst("On a friday");
 $radioheadAlbums->display();
 
 
