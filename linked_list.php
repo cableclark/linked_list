@@ -57,10 +57,32 @@ class LinkedList {
           }
           $previous= $currentNode;
           $currentNode=$currentNode->next;
-        }
-    }
-}
+          }
+      }
+  }
 
+  public function insertAfter(string $data= NULL, string $query= NULL) {
+    $newNode = new Node($data);
+
+    if ($this->firstNode) {
+      $nextNode= NULL;
+      $currentNode=$this->firstNode;
+      while ($currentNode!= NULL) {
+        if ($currentNode->data === $query) {
+            if($nextNode !== NULL) {
+              $newNode->next=$nextNode;
+            }
+              $currentNode->next = $newNode;
+              $this->totalNodes++;
+              break;
+        }
+        $currentNode=$currentNode->next;
+        $nextNode=$currentNode->next;
+    }
+
+  }
+
+}
   public function search (string $data= NULL) {
     if ($this->totalNodes) {
         $currentNode= $this->firstNode;
@@ -76,7 +98,6 @@ class LinkedList {
   }
 
 
-
   public function display (){
     echo "Total: " . $this->totalNodes . " \n";
     $currentNode = $this->firstNode;
@@ -88,8 +109,6 @@ class LinkedList {
 }
 
 
-
-
 $radioheadAlbums= new LinkedList;
 $radioheadAlbums->insert("The bends");
 $radioheadAlbums->insert("OK Computer");
@@ -97,9 +116,9 @@ $radioheadAlbums->insert("Kid A");
 $radioheadAlbums->insert("Amnesiac");
 $radioheadAlbums->insertAtFirst("Pablo Honey");
 $radioheadAlbums->insertAtFirst("On a friday");
-$radioheadAlbums->display();
 $radioheadAlbums->search("Pablo Honey");
 $radioheadAlbums->insertBefore("King of Limbs", "Amnesiac");
+$radioheadAlbums->insertAfter("In rainbows", "Kid A");
 print_r($radioheadAlbums->display());
 
 
