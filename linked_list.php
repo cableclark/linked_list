@@ -40,10 +40,31 @@ class LinkedList {
     $this->totalNodes++;
     return true;
   }
+
+  public function insertBefore(string $data= NULL, string $query= NULL) {
+    $newNode = new Node($data);
+
+    if ($this->firstNode) {
+        $previous= NULL;
+        $currentNode=$this->firstNode;
+
+        while ($currentNode != NULL) {
+          if ($currentNode->data === $query) {
+              $newNode->next = $currentNode;
+              $previous->next = $newNode;
+              $this->totalNodes++;
+              break;
+          }
+          $previous= $currentNode;
+          $currentNode=$currentNode->next;
+        }
+    }
+}
+
   public function search (string $data= NULL) {
     if ($this->totalNodes) {
         $currentNode= $this->firstNode;
-        while($currentNode !=NULL) {
+        while($currentNode != NULL) {
           if ($currentNode->data ===$data) {
             return $currentNode;
           }
@@ -53,6 +74,8 @@ class LinkedList {
     }
       return false;
   }
+
+
 
   public function display (){
     echo "Total: " . $this->totalNodes . " \n";
@@ -75,8 +98,9 @@ $radioheadAlbums->insert("Amnesiac");
 $radioheadAlbums->insertAtFirst("Pablo Honey");
 $radioheadAlbums->insertAtFirst("On a friday");
 $radioheadAlbums->display();
-echo $radioheadAlbums->search("Pablo Honey");
-
+$radioheadAlbums->search("Pablo Honey");
+$radioheadAlbums->insertBefore("King of Limbs", "Amnesiac");
+print_r($radioheadAlbums->display());
 
 
 
