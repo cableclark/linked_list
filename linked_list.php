@@ -40,7 +40,19 @@ class LinkedList {
     $this->totalNodes++;
     return true;
   }
+  public function search (string $data= NULL) {
+    if ($this->totalNodes) {
+        $currentNode= $this->firstNode;
+        while($currentNode !=NULL) {
+          if ($currentNode->data ===$data) {
+            return $currentNode;
+          }
+          $currentNode=$currentNode->next;
+        }
 
+    }
+      return false;
+  }
 
   public function display (){
     echo "Total: " . $this->totalNodes . " \n";
@@ -63,6 +75,7 @@ $radioheadAlbums->insert("Amnesiac");
 $radioheadAlbums->insertAtFirst("Pablo Honey");
 $radioheadAlbums->insertAtFirst("On a friday");
 $radioheadAlbums->display();
+echo $radioheadAlbums->search("Pablo Honey");
 
 
 
