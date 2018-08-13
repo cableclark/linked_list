@@ -162,6 +162,36 @@ class LinkedList {
      }
   }
 
+  public function reverse() {
+        if ($this->firstNode !== NULL) {
+            if ($this->firstNode->next !== NULL) {
+                $reversedList = NULL;
+                $next = NULL;
+                $currentNode = $this->firstNode;
+                while ($currentNode !== NULL) {
+                    $next = $currentNode->next;
+                    $currentNode->next = $reversedList;
+                    $reversedList = $currentNode;
+                    $currentNode = $next;
+                }
+                $this->firstNode = $reversedList;
+            }
+        }
+    }
+    public function getNthNode(int $n = 0) {
+          $count = 1;
+          if ($this->firstNode !== NULL) {
+              $currentNode = $this->firstNode;
+              while ($currentNode !== NULL) {
+                  if ($count === $n) {
+                      return $currentNode;
+                  }
+                  $count++;
+                  $currentNode = $currentNode->next;
+              }
+          }
+      }
+
 }
 
 
@@ -179,7 +209,9 @@ print_r($radioheadAlbums->display());
 $radioheadAlbums->deleteFirst();
 $radioheadAlbums->deleteLast();
 $radioheadAlbums->delete("On a friday");
+$radioheadAlbums->reverse();
 print_r($radioheadAlbums->display());
+echo $radioheadAlbums->getNthNode(4)->data;
 
 
 
