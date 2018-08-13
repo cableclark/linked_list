@@ -57,8 +57,8 @@ class LinkedList {
           }
           $previous= $currentNode;
           $currentNode=$currentNode->next;
-          }
       }
+    }
   }
 
   public function insertAfter(string $data= NULL, string $query= NULL) {
@@ -79,12 +79,24 @@ class LinkedList {
         $currentNode=$currentNode->next;
         $nextNode=$currentNode->next;
     }
+  }
+}
 
+  public function deleteFirst () {
+     if ($this->firstNode !== NULL) {
+         if($this->firstNode->next !== NULL) {
+           $this->firstNode= $this->firstNode->next;
+         } else {
+           $this->firstNode = NULL;
+         }
+         $this->totalNodes--;
+         return true;
+     }
+     return false;
   }
 
-}
   public function search (string $data= NULL) {
-    if ($this->totalNodes) {
+     if ($this->totalNodes) {
         $currentNode= $this->firstNode;
         while($currentNode != NULL) {
           if ($currentNode->data ===$data) {
@@ -119,6 +131,8 @@ $radioheadAlbums->insertAtFirst("On a friday");
 $radioheadAlbums->search("Pablo Honey");
 $radioheadAlbums->insertBefore("King of Limbs", "Amnesiac");
 $radioheadAlbums->insertAfter("In rainbows", "Kid A");
+print_r($radioheadAlbums->display());
+$radioheadAlbums->deleteFirst();
 print_r($radioheadAlbums->display());
 
 
