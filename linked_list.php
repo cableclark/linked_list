@@ -139,6 +139,29 @@ class LinkedList {
       $currentNode = $currentNode->next;
     }
   }
+
+
+ public function delete(string $query = NULL) {
+     if ($this->firstNode) {
+       $previous = NULL;
+       $currentNode=$this->firstNode;
+       while ($currentNode !== NULL) {
+             if ($currentNode->data === $query) {
+                if ($currentNode->next === NULL) {
+                    $previous->next = NULL;
+                 } else {
+                        $previous->next = $currentNode->next;
+                 }
+
+                 $this->_totalNode--;
+                break;
+              }
+                $previous = $currentNode;
+                $currentNode = $currentNode->next;
+        }
+     }
+  }
+
 }
 
 
@@ -155,6 +178,7 @@ $radioheadAlbums->insertAfter("In rainbows", "Kid A");
 print_r($radioheadAlbums->display());
 $radioheadAlbums->deleteFirst();
 $radioheadAlbums->deleteLast();
+$radioheadAlbums->delete("On a friday");
 print_r($radioheadAlbums->display());
 
 
