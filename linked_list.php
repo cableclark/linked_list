@@ -95,6 +95,27 @@ class LinkedList {
      return false;
   }
 
+  public function deleteLast() {
+          if ($this->firstNode !== NULL) {
+              $currentNode = $this->firstNode;
+              if ($currentNode->next === NULL) {
+                  $this->firstNode = NULL;
+              } else {
+                  $previousNode = NULL;
+
+                  while ($currentNode->next !== NULL) {
+                      $previousNode = $currentNode;
+                      $currentNode = $currentNode->next;
+                  }
+
+                  $previousNode->next = NULL;
+                  $this->totalNodes--;
+                  return TRUE;
+              }
+          }
+          return FALSE;
+      }
+
   public function search (string $data= NULL) {
      if ($this->totalNodes) {
         $currentNode= $this->firstNode;
@@ -133,6 +154,7 @@ $radioheadAlbums->insertBefore("King of Limbs", "Amnesiac");
 $radioheadAlbums->insertAfter("In rainbows", "Kid A");
 print_r($radioheadAlbums->display());
 $radioheadAlbums->deleteFirst();
+$radioheadAlbums->deleteLast();
 print_r($radioheadAlbums->display());
 
 
