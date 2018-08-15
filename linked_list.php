@@ -9,7 +9,7 @@ class Node {
   }
 }
 
-class LinkedList {
+class LinkedList implements Iterator{
   private $firstNode = NULL;
   private $totalNodes = 0;
 
@@ -192,6 +192,29 @@ class LinkedList {
           }
       }
 
+  public function current() {
+     return $this->currentNode->data;
+   }
+
+  public function next() {
+     $this->currentPosition++;
+     $this->currentNode = $this->currentNode->next;
+   }
+
+  public function key() {
+      return $this->_currentPosition;
+  }
+
+  public function rewind() {
+      $this->currentPosition = 0;
+      $this->currentNode = $this->firstNode;
+  }
+
+  public function valid() {
+      return $this->currentNode !== NULL;
+  }
+
+
 }
 
 
@@ -205,15 +228,15 @@ $radioheadAlbums->insertAtFirst("On a friday");
 $radioheadAlbums->search("Pablo Honey");
 $radioheadAlbums->insertBefore("King of Limbs", "Amnesiac");
 $radioheadAlbums->insertAfter("In rainbows", "Kid A");
-print_r($radioheadAlbums->display());
 $radioheadAlbums->deleteFirst();
 $radioheadAlbums->deleteLast();
 $radioheadAlbums->delete("On a friday");
 $radioheadAlbums->reverse();
-print_r($radioheadAlbums->display());
 echo $radioheadAlbums->getNthNode(4)->data;
 
 
-
+foreach ($radioheadAlbums as $title) {
+    echo $title . "\n";
+}
 
  ?>
